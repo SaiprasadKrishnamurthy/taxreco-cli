@@ -1,11 +1,8 @@
 """
-    Main script that does the following:
-      - Parses the Sales files and 26AS files in the respective directories.
-      - For every GSTIN in the sales file, calls the GSTIN API to get the Legal Name.
-      - Fuzzy Matches this Legal Name with the Legal Name in 26AS.
-      - Establishes a Link between GSTIN - LegalName - TAN No.
-      - Dumps this linked data into an output tab delimited text file
+    Main cli app for taxreco
 """
+
+__author__ = 'Sai Kris'
 
 import typer
 
