@@ -6,10 +6,12 @@ __author__ = 'Sai Kris'
 
 import typer
 
+from commands.twenty_six_as_converter import convert_26as_command_csv, convert_26as_command_excel
 from commands.delete_customer_linker import delete_customer_linker_command
 from commands.jobs import list_jobs_command
 from commands.reports import income_comparison_report_command, section_customer_wise_26as_report_command, \
-    customer_wise_reconciliation_report_command, customer_wise_tan_reconciliation_summary_report_tds_command
+    customer_wise_reconciliation_report_command, customer_wise_tan_reconciliation_summary_report_tds_command, \
+    section_wise_reconciliation_report_command
 from commands.trigger_customer_linker import trigger_customer_linker_command
 from util.common_login import common_login
 
@@ -63,7 +65,7 @@ def customer_wise_reconciliation_summary_report(
     short_help='Generate a section-wise TDS reconciliation summary report for a financial year')
 def section_wise_reconciliation_summary_report(
         financial_year: int = typer.Option("-fy", "--fy", help="The financial year eg: 2021")):
-    section_wise_reconciliation_summary_report(financial_year)
+    section_wise_reconciliation_report_command(financial_year)
 
 
 @app.command(
@@ -71,6 +73,24 @@ def section_wise_reconciliation_summary_report(
 def customer_tan_wise_reconciliation_summary_report(
         financial_year: int = typer.Option("-fy", "--fy", help="The financial year eg: 2021")):
     customer_wise_tan_reconciliation_summary_report_tds_command(financial_year)
+
+
+@app.command(
+    short_help='Convert 26as to CSV and email the output')
+def convert_26as_csv(
+        twentysix_as_file_path: str,
+        email_to_send_output_to: str,
+        output_file_password: str):
+    convert_26as_command_csv(twentysix_as_file_path, email_to_send_output_to, output_file_password)
+
+
+@app.command(
+    short_help='Convert 26as to Excel and email the output')
+def convert_26as_excel(
+        twentysix_as_file_path: str,
+        email_to_send_output_to: str,
+        output_file_password: str):
+    convert_26as_command_excel(twentysix_as_file_path, email_to_send_output_to, output_file_password)
 
 
 if __name__ == "__main__":
