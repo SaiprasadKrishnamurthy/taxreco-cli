@@ -25,7 +25,8 @@ def list_jobs_command():
             table.add_column("Status", justify="left")
             table.add_column("Started", justify="left")
             table.add_column("Ended", justify="left")
-            for job in jobs_json:
+            sliced = jobs_json[0:10]
+            for job in sliced:
                 table.add_row(job["id"], job["jobType"], job["userId"], job["status"],
                               str(format_date_time(job["datetime"])),
                               str(format_date_time(job["enddatetime"])))
